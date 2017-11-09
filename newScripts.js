@@ -16,7 +16,8 @@ $(document).ready(function() {
 		$('#ship-to .need').each(function() {
 			if ($(this).val() == '') {
 				$(this).prev().addClass('red');
-				console.log('shipping fields are blank')
+				$('#js-error-message').text('Fields marked in red are either missing or incorrect').addClass('red');
+				// console.log('shipping fields are blank');
 				valid = 1;
 			} else {
 				$(this).prev().removeClass('red');
@@ -24,10 +25,11 @@ $(document).ready(function() {
 		});
 
 		//---------- validates class of email within the acad_form -----------
-		$('#login-details .email').each(function(){
-			if($(this).val().search(emailRegEx) == -1){
+		$('#login-details .email').each(function() {
+			if($(this).val().search(emailRegEx) == -1 || $(this).val() == '') {
 				$(this).prev().addClass('red');
-				console.log('invalid email')
+				$('#js-error-message').text('Email format is invalid').addClass('red');
+				// console.log('invalid email');
 				valid = 1;
 			} else {
 				$(this).prev().removeClass('red');
@@ -37,16 +39,17 @@ $(document).ready(function() {
 		//---------- Checks if passwords are 8 characters and match ----------
 		if (password.length < 8 && verifyPassword.length < 8 || password !== verifyPassword) {
 			$('#Customer_Password, #Customer_VerifyPassword').prev().addClass('red need');
-			console.log('Passwords must be at least 8 characters and be exactly the same');
+			$('#js-error-message').text('Password must be at least 8 characters and contain at least one number').addClass('red');
+			// console.log('Passwords must be at least 8 characters and be exactly the same');
 			valid = 1;
 		} else {
 			$('#Customer_Password, #Customer_VerifyPassword').prev().removeClass('red need');
 		}
 
 		//---------- Checks if ship state is selected ----------
-		if (shipStateSelect == '') {
+		if (shipStateSelect == '' && shipOtherState == '') {
 			$('#Customer_ShipState').prev().addClass('red need');
-			console.log('Please select your shipping state')
+			// console.log('Please select your shipping state');
 			valid = 1;
 		} else {
 			$('#Customer_ShipState').prev().removeClass('red need');
@@ -55,8 +58,8 @@ $(document).ready(function() {
 		//---------- Checks if ship country is selected ----------
 		if (shipCountrySelect == '') {
 			$('#Customer_ShipCountry').prev().addClass('red need');
-			console.log('Please select your shipping country')
-			valid = 1
+			// console.log('Please select your shipping country')
+			valid = 1;
 		}
 
 		//---------- if bill to is unchecked ----------
@@ -65,7 +68,7 @@ $(document).ready(function() {
 			$('#bill-to .need').each(function() {
 				if ($(this).val() == '') {
 					$(this).prev().addClass('red');
-					console.log('billing fields are blank')
+					// console.log('billing fields are blank')
 					valid = 1;
 				} else {
 					$(this).prev().removeClass('red');
@@ -73,9 +76,9 @@ $(document).ready(function() {
 			});
 
 		//---------- Checks if ship state is selected ----------
-		if (billStateSelect == '') {
+		if (billStateSelect == '' && billOtherState == '') {
 			$('#Customer_BillState').prev().addClass('red need');
-			console.log('Please select your billing state')
+			// console.log('Please select your billing state')
 			valid = 1;
 		} else {
 			$('#Customer_BillState').prev().removeClass('red need');
@@ -84,8 +87,8 @@ $(document).ready(function() {
 		//---------- Checks if ship country is selected ----------
 		if (billCountrySelect == '') {
 			$('#Customer_BillCountry').prev().addClass('red need');
-			console.log('Please select your billing country')
-			valid = 1
+			// console.log('Please select your billing country')
+			valid = 1;
 		} else {
 			$('#Customer_BillCountry').prev().removeClass('red need');
 		}
