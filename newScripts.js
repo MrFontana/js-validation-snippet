@@ -136,7 +136,7 @@ $(document).ready(function() {
 		}
 	});
 
-	//---------- if any required fields are blank, appends general error message ----------
+	//---------- waits for ship to and bill to to loop, then checks for left over blank fields in this case, with the class of red ----------
 	if (acadNeed == 1) {
 		$("#error-container").append('<li>Fields marked in red are required. One or more required fields are missing.</li>').addClass('red');
 	} else {
